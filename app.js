@@ -36,7 +36,7 @@ const getImages = (query) => {
     .then(data => {
       if (data.total == 0) {
         const errorTag = document.getElementById("error-msg");
-        errorTag.innerText = "Sorry something went wrong , We did't find any picture";
+        errorTag.innerText = "Sorry something went wrong !!! , We did't find any picture .";
 
       } else {
          //console.log(data.hits)
