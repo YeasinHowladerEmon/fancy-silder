@@ -67,6 +67,6 @@ img {
     width: 90%;
   }
 }
-/* .spinner{
-    display: none !important;
-} */
+.error{
+  text-align: center;
+  color: red;

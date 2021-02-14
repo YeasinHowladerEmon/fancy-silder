@@ -33,8 +33,17 @@ const getImages = (query) => {
   toggleSpinner();
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
-    .then(data => showImages(data.hits))
-    .catch(err => console.log(err))
+    .then(data => {
+      if (data.total == 0) {
+        const errorTag = document.getElementById("error-msg");
+        errorTag.innerText = "Sorry something went wrong , We did't find any picture";
+
+      } else {
+         //console.log(data.hits)
+         showImages(data.hits)
+        
+      }
+    })
 }
 
 let slideIndex = 0;
@@ -43,11 +52,8 @@ const selectItem = (event, img) => {
   element.classList.toggle('added');
  
   let item = sliders.indexOf(img);
-  console.log(item)
-  console.log(img)
   if  (item === -1) {
       sliders.push(img);
-      console.log(sliders)
   } else {
     sliders = sliders.filter((slider) => slider !== img)
   }
@@ -143,3 +149,6 @@ const toggleSpinner = () => {
   const spinner = document.getElementById("loading-spinner")
    spinner.classList.toggle("d-none");
 }
+
+
+
