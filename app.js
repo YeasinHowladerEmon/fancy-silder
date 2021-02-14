@@ -24,11 +24,13 @@ const showImages = (images) => {
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
+   
   })
-
+  toggleSpinner()
 }
 
 const getImages = (query) => {
+  toggleSpinner();
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
@@ -85,6 +87,7 @@ const createSlider = () => {
     src="${slide}"
     alt="">`;
     sliderContainer.appendChild(item)
+   
   })
   changeSlide(0)
   timer = setInterval(function () {
@@ -135,3 +138,8 @@ search.addEventListener ("keypress", function (event) {
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
+
+const toggleSpinner = () => {
+  const spinner = document.getElementById("loading-spinner")
+   spinner.classList.toggle("d-none");
+}
